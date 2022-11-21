@@ -1,0 +1,18 @@
+<div class="head">
+  <h1 style="float:center">Patient Management System</h1>
+</div>
+
+<ul>
+  <li>
+    <a class="patientList" routerLink="/" style="float:left" (click)="patients()">
+      Patients
+    </a>
+  </li>
+  <li>
+    <a class="patientList" routerLink="/appointments" style="float:right" (click)="appointments()">
+      Appointments
+    </a>
+  </li>
+</ul>
+
+<router-outlet></router-outlet>
