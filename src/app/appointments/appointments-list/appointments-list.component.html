@@ -26,7 +26,7 @@
 <h4>List of Appointments</h4>
 <div class="grid-container">
     <div *ngFor="let i of appList">
-        <div class="card" (click)="showAppointment(i)">
+        <div class="card">
             <div class="container">
                 <p>{{i.PatientName}}</p>
                 <p>{{i.StartTime}}</p>

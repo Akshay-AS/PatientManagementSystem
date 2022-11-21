@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IPatient } from 'src/app/ipatient';
 import { FormControl, FormGroup, UntypedFormBuilder, ValidatorFn, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ApiService } from 'src/app/api.service';
 
 @Component({
   selector: 'app-patients-list',
@@ -10,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PatientsListComponent implements OnInit {
 
-  constructor(private formBuilder:UntypedFormBuilder,private httpClient:HttpClient) { }
+  constructor(private formBuilder:UntypedFormBuilder,private httpClient:HttpClient,private service:ApiService) { }
 
   FirstName!:string;
   SecondName!:string;
@@ -24,13 +25,22 @@ export class PatientsListComponent implements OnInit {
   addNewPat:boolean=false;
 
   patList:IPatient[]=[];
+  newData!:IPatient;
 
   ngOnInit(): void {
+    this.subData();
+    console.log(this.patList);
   }
 
-  showPatient(i:IPatient){
-
+  subData(){
+    this.service.getPatients()
+    .subscribe(response=>{
+      this.patList=response
+    },(error)=>{
+      console.log("patload error");    
+    });
   }
+
 
   addPatients(){
     this.addNewPat=true;
@@ -38,6 +48,18 @@ export class PatientsListComponent implements OnInit {
 
   onSubmit(){
     this.addNewPat=false;
+    this.newData.FirstName=this.FirstName;
+    this.newData.SecondName=this.SecondName;
+    this.newData.DOB=this.DOB;
+    this.newData.SSN=this.SSN;
+    this.newData.email=this.email;
+
+    this.service.setPatient(this.newData)
+    .subscribe(addData=>{
+      this.patList.push(this.newData)
+    },(error)=>{
+      console.log("setpat error");   
+    })
 
   }
 }

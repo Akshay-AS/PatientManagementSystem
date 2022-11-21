@@ -27,7 +27,7 @@
 <h4>List of Patients</h4>
 <div class="grid-container">
     <div *ngFor="let i of patList">
-        <div class="card" (click)="showPatient(i)">
+        <div class="card">
             <div class="container">
                 <p>{{i.FirstName}} {{i.SecondName}}</p>
                 <p>{{i.DOB}}</p>
