@@ -1,7 +1,8 @@
 export interface IPatient {
+    PatientID:number,
     FirstName:string,
     SecondName:string,
-    DOB:Date,
+    DOB:string,
     SSN:string,
     email:string,
     isDeleted:boolean

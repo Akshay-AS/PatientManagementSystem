@@ -10,24 +10,24 @@ import { IPatient } from './ipatient';
 export class ApiService {
 
   constructor(private http:HttpClient) { }
-  private GetPatientsUrl="";
-  private GetAppointmentsUrl="";
-  private AddPatientUrl="";
-  private AddAppointmentUrl="";
+  private GetPatientsUrl="https://localhost:7295/api/pms/GetPatients";
+  private GetAppointmentsUrl="https://localhost:7295/api/pms/GetAppointments";
+  private AddPatientUrl="https://localhost:7295/api/pms/AddPatients";
+  private AddAppointmentUrl="https://localhost:7295/api/pms/AddAppointment";
 
-  getPatients():Observable<IPatient[]>{
-    return this.http.get<IPatient[]>(this.GetPatientsUrl)
+  getPatients():Observable<any>{
+    return this.http.get<any>(this.GetPatientsUrl)
   }
 
-  getAppointments():Observable<IAppointment[]>{
-    return this.http.get<IAppointment[]>(this.GetAppointmentsUrl)
+  getAppointments():Observable<any>{
+    return this.http.get<any>(this.GetAppointmentsUrl)
   }
 
-  setPatient(data:IPatient):Observable<IPatient[]>{
+  setPatient(data:IPatient):Observable<any>{
     return this.http.post<IPatient[]>(this.AddPatientUrl,data)
   }
 
-  setAppointment(data:IAppointment):Observable<IAppointment[]>{
+  setAppointment(data:IAppointment):Observable<any>{
     return this.http.post<IAppointment[]>(this.AddAppointmentUrl,data)
   }
 }

@@ -16,23 +16,29 @@ export class AppointmentsListComponent implements OnInit {
 
   constructor(private formBuilder:UntypedFormBuilder,private httpClient:HttpClient,private service:ApiService) { }
 
-  patientName:string='';
-  StartTime!:Date;
-  EndTime!:Date;
-  appointmentId!:number;
-  patientId!:number;
+  // patientName:string='';
+  // StartTime!:string;
+  // EndTime!:string;
+  // appointmentId!:number;
+  // patientId!:number;
 
   formFields:any[]=[];
-  form=new FormGroup({});
+  form!:FormGroup;
 
   addNewApp:boolean=false;
 
-  appList:IAppointment[]=[];
-  newData!:IAppointment;
+  appList:any[]=[];
+  newData!:any;
 
   ngOnInit(): void {
     this.subData();
-    console.log(this.appList);
+    this.form = new FormGroup({
+      appointmentId: new FormControl('',Validators.required),
+      patientId: new FormControl('',Validators.required),
+      patientName: new FormControl('',Validators.required),
+      StartTime: new FormControl('',Validators.required),
+      EndTime: new FormControl('',Validators.required)
+    });
     
   }
 
@@ -40,6 +46,7 @@ export class AppointmentsListComponent implements OnInit {
     this.service.getAppointments()
     .subscribe(response=>{
       this.appList=response
+      console.log(this.appList);
     },(error)=>{
       console.log("appload error");
     });
@@ -50,11 +57,11 @@ export class AppointmentsListComponent implements OnInit {
   }
   onSubmit(){
     this.addNewApp=false;
-    this.newData.AppointmentId=this.appointmentId;
-    this.newData.PatientId=this.patientId;
-    this.newData.PatientName=this.patientName;
-    this.newData.StartTime=this.StartTime;
-    this.newData.EndTime=this.EndTime;
+    this.newData.AppointmentId=this.form.value.appointmentId;
+    this.newData.PatientId=this.form.value.patientId;
+    this.newData.PatientName=this.form.value.patientName;
+    this.newData.StartTime=this.form.value.StartTime;
+    this.newData.EndTime=this.form.value.EndTime;
 
     this.service.setAppointment(this.newData)
     .subscribe(addData=>{

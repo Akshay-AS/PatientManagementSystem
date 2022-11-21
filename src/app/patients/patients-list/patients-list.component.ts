@@ -13,29 +13,40 @@ export class PatientsListComponent implements OnInit {
 
   constructor(private formBuilder:UntypedFormBuilder,private httpClient:HttpClient,private service:ApiService) { }
 
-  FirstName!:string;
-  SecondName!:string;
-  DOB!:Date;
-  SSN!:string;
-  email!:string;
+  // FirstName!:string;
+  // SecondName!:string;
+  // DOB!:string;
+  // SSN!:string;
+  // email!:string;
+  // PatientId!:number;
 
   formFields:any[]=[];
-  form=new FormGroup({});
+  form!:FormGroup;
 
   addNewPat:boolean=false;
 
-  patList:IPatient[]=[];
+  patList:any[]=[];
   newData!:IPatient;
 
   ngOnInit(): void {
     this.subData();
-    console.log(this.patList);
+    this.form = new FormGroup({
+      PatientId: new FormControl('',Validators.required),
+      FirstName: new FormControl('',Validators.required),
+      SecondName: new FormControl('',Validators.required),
+      DOB: new FormControl('',Validators.required),
+      SSN: new FormControl('',Validators.required),
+      email: new FormControl('',Validators.required)
+
+    });
   }
 
   subData(){
     this.service.getPatients()
     .subscribe(response=>{
       this.patList=response
+      console.log(this.patList);
+
     },(error)=>{
       console.log("patload error");    
     });
@@ -48,12 +59,14 @@ export class PatientsListComponent implements OnInit {
 
   onSubmit(){
     this.addNewPat=false;
-    this.newData.FirstName=this.FirstName;
-    this.newData.SecondName=this.SecondName;
-    this.newData.DOB=this.DOB;
-    this.newData.SSN=this.SSN;
-    this.newData.email=this.email;
-
+    this.newData.PatientID=this.form.value.PatientId;
+    this.newData.FirstName=this.form.value.FirstName;
+    this.newData.SecondName=this.form.value.SecondName;
+    this.newData.DOB=this.form.value.DOB;
+    this.newData.SSN=this.form.value.SSN;
+    this.newData.email=this.form.value.email;
+    console.log(this.newData);
+    
     this.service.setPatient(this.newData)
     .subscribe(addData=>{
       this.patList.push(this.newData)

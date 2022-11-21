@@ -4,20 +4,23 @@
 <div *ngIf="addNewPat">
     <form [formGroup]="form" (ngSubmit)="onSubmit()" >
         <div>
+            <label>Patient ID</label>
+            <input type="text"  placeholder="Enter First Name" formControlName="PatientId">
+            <br><br>
             <label>First Name</label>
-            <input type="text" ngModel="FirstName" placeholder="Enter First Name" formControlName="FirstName" >
+            <input type="text"  placeholder="Enter First Name" formControlName="FirstName">
             <br><br>
             <label>Second Name</label>
-            <input type="text" ngModel="SecondName" placeholder="Enter Second Name" formControlName="SecondName">
+            <input type="text"  placeholder="Enter Second Name" formControlName="SecondName">
             <br><br>
             <label>DOB</label>
-            <input type="date" ngModel="DOB" placeholder="Enter DOB" formControlName="DOB">
+            <input type="text"  placeholder="Enter DOB" formControlName="DOB">
             <br><br>
             <label>SSN</label>
-            <input type="text" ngModel="SSN" placeholder="Enter SSN" formControlName="SSN">
+            <input type="text" placeholder="Enter SSN" formControlName="SSN">
             <br><br>
             <label>email</label>
-            <input type="email" ngModel="email" placeholder="Enter email" formControlName="email">
+            <input type="email"  placeholder="Enter email" formControlName="email">
             <br><br>
             
         </div>
@@ -29,10 +32,11 @@
     <div *ngFor="let i of patList">
         <div class="card">
             <div class="container">
-                <p>{{i.FirstName}} {{i.SecondName}}</p>
-                <p>{{i.DOB}}</p>
-                <p>{{i.SSN}}</p>
-                <p>{{i.email}}</p>
+                <p>ID:{{i.patientId}}</p>
+                <p>Name:{{i.firstName}} {{i.lastName}}</p>
+                <p>DOB:{{i.dob}}</p>
+                <p>SSN:{{i.ssn}}</p>
+                <p>email:{{i.email}}</p>
             </div>
         </div>
     </div>

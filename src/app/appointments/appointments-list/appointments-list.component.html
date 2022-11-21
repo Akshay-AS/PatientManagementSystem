@@ -5,19 +5,19 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" >
         <div>
             <label>Appointment Id</label>
-            <input type="text" ngModel="appointmentId" placeholder="Enter Appointment Id" formControlName="appointmentId">
+            <input type="text"  placeholder="Enter Patient Name" formControlName="appointmentId">
             <br><br>
             <label>Patient Id</label>
-            <input type="text" ngModel="patientId" placeholder="Enter Patient Name" formControlName="patientId">
+            <input type="text"  placeholder="Enter Patient Name" formControlName="patientId">
             <br><br>
             <label>Patient Name</label>
-            <input type="text" ngModel="patientName" placeholder="Enter Patient Name" formControlName="patientName">
+            <input type="text"  placeholder="Enter Patient Name" formControlName="patientName">
             <br><br>
             <label>Start Time</label>
-            <input type="time" ngModel="StartTime" placeholder="Enter Start Time" formControlName="StartTime">
+            <input type="text"  placeholder="Enter Start Time" formControlName="StartTime">
             <br><br>
             <label>End Time</label>
-            <input type="time" ngModel="EndTime" placeholder="Enter End Time" formControlName="EndTime">
+            <input type="text"  placeholder="Enter End Time" formControlName="EndTime">
             <br><br>
         </div>
         <button type="submit" >Submit</button>
@@ -28,9 +28,11 @@
     <div *ngFor="let i of appList">
         <div class="card">
             <div class="container">
-                <p>{{i.PatientName}}</p>
-                <p>{{i.StartTime}}</p>
-                <p>{{i.EndTime}}</p>
+                <p>Appointment ID:{{i.appointmentId}}</p>
+                <p>Patient ID:{{i.patientId}}</p>
+                <p>Patient Name:{{i.patientName}}</p>
+                <p>Start Time:{{i.startTime}}</p>
+                <p>End Time:{{i.endTime}}</p>
             </div>
         </div>
     </div>
