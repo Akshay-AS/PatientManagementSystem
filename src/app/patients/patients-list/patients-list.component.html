@@ -1,1 +1,39 @@
-<p>patients-list works!</p>
+<div id="input" *ngIf="!addNewPat">
+    <button type="submit" (click)="addPatients()">Add new Patient</button>
+</div>
+<div *ngIf="addNewPat">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+        <div>
+            <label>First Name</label>
+            <input type="text" ngModel="FirstName" placeholder="Enter First Name" formControlName="FirstName" >
+            <br><br>
+            <label>Second Name</label>
+            <input type="text" ngModel="SecondName" placeholder="Enter Second Name" formControlName="SecondName">
+            <br><br>
+            <label>DOB</label>
+            <input type="date" ngModel="DOB" placeholder="Enter DOB" formControlName="DOB">
+            <br><br>
+            <label>SSN</label>
+            <input type="text" ngModel="SSN" placeholder="Enter SSN" formControlName="SSN">
+            <br><br>
+            <label>email</label>
+            <input type="email" ngModel="email" placeholder="Enter email" formControlName="email">
+            <br><br>
+            
+        </div>
+        <button type="submit" >Submit</button>
+    </form>
+</div>
+<h4>List of Patients</h4>
+<div class="grid-container">
+    <div *ngFor="let i of patList">
+        <div class="card" (click)="showPatient(i)">
+            <div class="container">
+                <p>{{i.FirstName}} {{i.SecondName}}</p>
+                <p>{{i.DOB}}</p>
+                <p>{{i.SSN}}</p>
+                <p>{{i.email}}</p>
+            </div>
+        </div>
+    </div>
+</div>

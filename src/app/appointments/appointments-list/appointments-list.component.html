@@ -1,1 +1,37 @@
-<p>appointments-list works!</p>
+<div id="input" *ngIf="!addNewApp">
+    <button type="submit" (click)="addAppointment()">Add new Appointment</button>
+</div>
+<div *ngIf="addNewApp">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+        <div>
+            <label>Appointment Id</label>
+            <input type="text" ngModel="appointmentId" placeholder="Enter Appointment Id" formControlName="appointmentId">
+            <br><br>
+            <label>Patient Id</label>
+            <input type="text" ngModel="patientId" placeholder="Enter Patient Name" formControlName="patientId">
+            <br><br>
+            <label>Patient Name</label>
+            <input type="text" ngModel="patientName" placeholder="Enter Patient Name" formControlName="patientName">
+            <br><br>
+            <label>Start Time</label>
+            <input type="time" ngModel="StartTime" placeholder="Enter Start Time" formControlName="StartTime">
+            <br><br>
+            <label>End Time</label>
+            <input type="time" ngModel="EndTime" placeholder="Enter End Time" formControlName="EndTime">
+            <br><br>
+        </div>
+        <button type="submit" >Submit</button>
+    </form>
+</div>
+<h4>List of Appointments</h4>
+<div class="grid-container">
+    <div *ngFor="let i of appList">
+        <div class="card" (click)="showAppointment(i)">
+            <div class="container">
+                <p>{{i.PatientName}}</p>
+                <p>{{i.StartTime}}</p>
+                <p>{{i.EndTime}}</p>
+            </div>
+        </div>
+    </div>
+</div>
