@@ -28,7 +28,7 @@ export class AppointmentsListComponent implements OnInit {
   addNewApp:boolean=false;
 
   appList:any[]=[];
-  newData!:any;
+  // newData!:any;
 
   ngOnInit(): void {
     this.subData();
@@ -57,18 +57,25 @@ export class AppointmentsListComponent implements OnInit {
   }
   onSubmit(){
     this.addNewApp=false;
-    this.newData.AppointmentId=this.form.value.appointmentId;
-    this.newData.PatientId=this.form.value.patientId;
-    this.newData.PatientName=this.form.value.patientName;
-    this.newData.StartTime=this.form.value.StartTime;
-    this.newData.EndTime=this.form.value.EndTime;
+    const newData:any={
+    AppointmentId:parseInt(this.form.value.appointmentId),
+    PatientId:parseInt(this.form.value.patientId),
+    PatientName:this.form.value.patientName,
+    StartTime:this.form.value.StartTime,
+    EndTime:this.form.value.EndTime,
+    }
+    console.log(newData);
 
-    this.service.setAppointment(this.newData)
+    this.service.setAppointment(newData)
     .subscribe(addData=>{
-      this.appList.push(this.newData)
+      this.appList.push(newData)
     },(error)=>{
       console.log("setapp error")
     })   
+  }
+
+  Delete(i:IAppointment){
+    this.service.deleteAppointment(i.AppointmentId);
   }
 
 }

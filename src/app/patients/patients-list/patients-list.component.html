@@ -20,7 +20,7 @@
             <input type="text" placeholder="Enter SSN" formControlName="SSN">
             <br><br>
             <label>email</label>
-            <input type="email"  placeholder="Enter email" formControlName="email">
+            <input type="text"  placeholder="Enter email" formControlName="email">
             <br><br>
             
         </div>
@@ -28,7 +28,7 @@
     </form>
 </div>
 <h4>List of Patients</h4>
-<div class="grid-container">
+<div class="grid-container" *ngIf="patList!=null">
     <div *ngFor="let i of patList">
         <div class="card">
             <div class="container">

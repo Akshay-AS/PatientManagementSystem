@@ -26,7 +26,7 @@ export class PatientsListComponent implements OnInit {
   addNewPat:boolean=false;
 
   patList:any[]=[];
-  newData!:IPatient;
+  // newData!:IPatient;
 
   ngOnInit(): void {
     this.subData();
@@ -59,17 +59,19 @@ export class PatientsListComponent implements OnInit {
 
   onSubmit(){
     this.addNewPat=false;
-    this.newData.PatientID=this.form.value.PatientId;
-    this.newData.FirstName=this.form.value.FirstName;
-    this.newData.SecondName=this.form.value.SecondName;
-    this.newData.DOB=this.form.value.DOB;
-    this.newData.SSN=this.form.value.SSN;
-    this.newData.email=this.form.value.email;
-    console.log(this.newData);
-    
-    this.service.setPatient(this.newData)
+    const newData:any={
+    PatientID:parseInt(this.form.value.PatientId),
+    FirstName:this.form.value.FirstName,
+    SecondName:this.form.value.SecondName,
+    DOB:this.form.value.DOB,
+    SSN:this.form.value.SSN,
+    email:this.form.value.email,
+    isDeleted:false
+    }
+    console.log(newData);
+    this.service.setPatient(newData)
     .subscribe(addData=>{
-      this.patList.push(this.newData)
+      this.patList.push(newData)
     },(error)=>{
       console.log("setpat error");   
     })
