@@ -2,25 +2,25 @@
     <button type="submit" (click)="addAppointment()">Add new Appointment</button>
 </div>
 <div *ngIf="addNewApp">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div>
             <label>Appointment Id</label>
-            <input type="text"  placeholder="Enter Appointment Id" formControlName="appointmentId">
+            <input type="text" placeholder="Enter Appointment Id" formControlName="appointmentId">
             <br><br>
             <label>Patient Id</label>
-            <input type="text"  placeholder="Enter Patient Id" formControlName="patientId">
+            <input type="text" placeholder="Enter Patient Id" formControlName="patientId">
             <br><br>
             <label>Patient Name</label>
-            <input type="text"  placeholder="Enter Patient Name" formControlName="patientName">
+            <input type="text" placeholder="Enter Patient Name" formControlName="patientName">
             <br><br>
             <label>Start Time</label>
-            <input type="text"  placeholder="Enter Start Time" formControlName="StartTime">
+            <input type="time" placeholder="Enter Start Time" formControlName="startTime">
             <br><br>
             <label>End Time</label>
-            <input type="text"  placeholder="Enter End Time" formControlName="EndTime">
+            <input type="time" placeholder="Enter End Time" formControlName="endTime">
             <br><br>
         </div>
-        <button type="submit" >Submit</button>
+        <button type="submit">Submit</button>
     </form>
 </div>
 <h4>List of Appointments</h4>

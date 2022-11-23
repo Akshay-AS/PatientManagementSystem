@@ -11,71 +11,70 @@ import { ApiService } from 'src/app/api.service';
 })
 export class PatientsListComponent implements OnInit {
 
-  constructor(private formBuilder:UntypedFormBuilder,private httpClient:HttpClient,private service:ApiService) { }
+  constructor(private formBuilder: UntypedFormBuilder, private httpClient: HttpClient, private service: ApiService) { }
 
 
-  formFields:any[]=[];
-  form!:FormGroup;
+  formFields: any[] = [];
+  form!: FormGroup;
 
-  addNewPat:boolean=false;
+  addNewPat: boolean = false;
 
-  patList:any[]=[];
+  patList: IPatient[] = [];
 
   ngOnInit(): void {
     this.subData();
     this.form = new FormGroup({
-      PatientId: new FormControl('',Validators.required),
-      FirstName: new FormControl('',Validators.required),
-      SecondName: new FormControl('',Validators.required),
-      DOB: new FormControl('',Validators.required),
-      SSN: new FormControl('',Validators.required),
-      email: new FormControl('',Validators.required)
-
+      patientId: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      dob: new FormControl('', Validators.required),
+      ssn: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required)
     });
   }
 
-  subData(){
+  subData() {
     this.service.getPatients()
-    .subscribe(response=>{
-      this.patList=response
-      console.log(this.patList);
+      .subscribe(response => {
+        this.patList = response
+        console.log(this.patList);
 
-    },(error)=>{
-      console.log("patload error");    
-    });
+      }, (error) => {
+        console.log("patload error");
+      });
   }
 
 
-  addPatients(){
-    this.addNewPat=true;
+  addPatients() {
+    this.addNewPat = true;
   }
 
-  Delete(i:any){
+  Delete(i: IPatient) {
     console.log(i);
     this.service.deletePatient(i.patientId).subscribe();
     window.location.reload();
     console.log(i.patientId)
   }
 
-  onSubmit(){
-    this.addNewPat=false;
-    const newData:IPatient={
-    PatientId:parseInt(this.form.value.PatientId),
-    FirstName:this.form.value.FirstName,
-    LastName:this.form.value.SecondName,
-    DOB:this.form.value.DOB,
-    SSN:this.form.value.SSN,
-    Email:this.form.value.email,
-    isDeleted:false
+  onSubmit() {
+    this.addNewPat = false;
+    const newData: IPatient = {
+      patientId: parseInt(this.form.value.patientId),
+      firstName: this.form.value.firstName,
+      lastName: this.form.value.lastName,
+      dob: this.form.value.dob,
+      ssn: this.form.value.ssn,
+      email: this.form.value.email,
+      isDeleted: false
     }
     console.log(newData);
     this.service.setPatient(newData)
-    .subscribe(addData=>{
-      this.patList.push(newData)
-      window.location.reload();
-    },(error)=>{
-      console.log("setpat error");   
-    })
+      .subscribe(addData => {
+        this.patList.push(newData)
+        window.location.reload();
+      }, (error) => {
+        console.log("setpat error");
+      })
 
   }
 }

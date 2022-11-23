@@ -14,64 +14,59 @@ import { ApiService } from 'src/app/api.service';
 })
 export class AppointmentsListComponent implements OnInit {
 
-  constructor(private formBuilder:UntypedFormBuilder,private httpClient:HttpClient,private service:ApiService) { }
+  constructor(private service: ApiService) { }
 
 
-  formFields:any[]=[];
-  form!:FormGroup;
-
-  addNewApp:boolean=false;
-
-  appList:any[]=[];
+  formFields: any[] = [];
+  form!: FormGroup;
+  addNewApp: boolean = false;
+  appList: IAppointment[] = [];
 
   ngOnInit(): void {
     this.subData();
     this.form = new FormGroup({
-      appointmentId: new FormControl('',Validators.required),
-      patientId: new FormControl('',Validators.required),
-      patientName: new FormControl('',Validators.required),
-      StartTime: new FormControl('',Validators.required),
-      EndTime: new FormControl('',Validators.required)
+      appointmentId: new FormControl('', Validators.required),
+      patientId: new FormControl('', Validators.required),
+      patientName: new FormControl('', Validators.required),
+      startTime: new FormControl('', Validators.required),
+      endTime: new FormControl('', Validators.required)
     });
-    
   }
 
-  subData(){ 
+  subData() {
     this.service.getAppointments()
-    .subscribe(response=>{
-      this.appList=response
-
-      console.log(this.appList);
-    },(error)=>{
-      console.log("appload error");
-    });
+      .subscribe(response => {
+        this.appList = response
+      }, (error) => {
+        console.log("appload error");
+      });
   }
 
-  addAppointment(){
-    this.addNewApp=true;
+  addAppointment() {
+    this.addNewApp = true;
   }
-  onSubmit(){
-    this.addNewApp=false;
-    const newData:any={
-    AppointmentId:parseInt(this.form.value.appointmentId),
-    PatientId:parseInt(this.form.value.patientId),
-    PatientName:this.form.value.patientName,
-    StartTime:this.form.value.StartTime,
-    EndTime:this.form.value.EndTime,
+  onSubmit() {
+    this.addNewApp = false;
+    const newData: IAppointment = {
+      appointmentId: parseInt(this.form.value.appointmentId),
+      patientId: parseInt(this.form.value.patientId),
+      patientName: this.form.value.patientName,
+      startTime: this.form.value.startTime,
+      endTime: this.form.value.endTime,
     }
     console.log(newData);
 
     this.service.setAppointment(newData)
-    .subscribe(addData=>{
-      this.appList.push(newData)
-      window.location.reload();
-    },(error)=>{
-      console.log("setapp error")
-    })   
+      .subscribe(addData => {
+        this.appList.push(newData)
+        window.location.reload();
+      }, (error) => {
+        console.log("setapp error")
+      })
   }
 
-  Delete(i:any){
-    console.log(i.appointmentId);    
+  Delete(i: IAppointment) {
+    console.log(i.appointmentId);
     this.service.deleteAppointment(i.appointmentId).subscribe();
     window.location.reload();
 

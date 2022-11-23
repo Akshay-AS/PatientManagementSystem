@@ -2,35 +2,35 @@
     <button type="submit" (click)="addPatients()">Add new Patient</button>
 </div>
 <div *ngIf="addNewPat">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div>
             <label>Patient ID</label>
-            <input type="text"  placeholder="Enter Patient ID" formControlName="PatientId">
+            <input type="text" placeholder="Enter Patient ID" formControlName="patientId">
             <br><br>
             <label>First Name</label>
-            <input type="text"  placeholder="Enter First Name" formControlName="FirstName">
+            <input type="text" placeholder="Enter First Name" formControlName="firstName">
             <br><br>
             <label>Second Name</label>
-            <input type="text"  placeholder="Enter Second Name" formControlName="SecondName">
+            <input type="text" placeholder="Enter Second Name" formControlName="lastName">
             <br><br>
             <label>DOB</label>
-            <input type="text"  placeholder="Enter DOB" formControlName="DOB">
+            <input type="date" placeholder="Enter DOB" formControlName="dob">
             <br><br>
             <label>SSN</label>
-            <input type="text" placeholder="Enter SSN" formControlName="SSN">
+            <input type="text" placeholder="Enter SSN" formControlName="ssn">
             <br><br>
             <label>email</label>
-            <input type="text"  placeholder="Enter email" formControlName="email">
+            <input type="text" placeholder="Enter email" formControlName="email">
             <br><br>
-            
+
         </div>
-        <button type="submit" >Submit</button>
+        <button type="submit">Submit</button>
     </form>
 </div>
 <h4>List of Patients</h4>
 <div class="grid-container" *ngIf="patList!=null">
     <div *ngFor="let i of patList">
-        <div class="card" *ngIf="i.isDeleted==false">
+        <div class="card">
             <div class="container">
                 <p>ID:{{i.patientId}}</p>
                 <p>Name:{{i.firstName}} {{i.lastName}}</p>
