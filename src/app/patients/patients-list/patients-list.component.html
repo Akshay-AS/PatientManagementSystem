@@ -5,7 +5,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" >
         <div>
             <label>Patient ID</label>
-            <input type="text"  placeholder="Enter First Name" formControlName="PatientId">
+            <input type="text"  placeholder="Enter Patient ID" formControlName="PatientId">
             <br><br>
             <label>First Name</label>
             <input type="text"  placeholder="Enter First Name" formControlName="FirstName">
@@ -30,13 +30,14 @@
 <h4>List of Patients</h4>
 <div class="grid-container" *ngIf="patList!=null">
     <div *ngFor="let i of patList">
-        <div class="card">
+        <div class="card" *ngIf="i.isDeleted==false">
             <div class="container">
                 <p>ID:{{i.patientId}}</p>
                 <p>Name:{{i.firstName}} {{i.lastName}}</p>
                 <p>DOB:{{i.dob}}</p>
                 <p>SSN:{{i.ssn}}</p>
                 <p>email:{{i.email}}</p>
+                <button (click)="Delete(i)">Delete</button>
             </div>
         </div>
     </div>

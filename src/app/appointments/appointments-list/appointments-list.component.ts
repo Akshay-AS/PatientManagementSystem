@@ -16,11 +16,6 @@ export class AppointmentsListComponent implements OnInit {
 
   constructor(private formBuilder:UntypedFormBuilder,private httpClient:HttpClient,private service:ApiService) { }
 
-  // patientName:string='';
-  // StartTime!:string;
-  // EndTime!:string;
-  // appointmentId!:number;
-  // patientId!:number;
 
   formFields:any[]=[];
   form!:FormGroup;
@@ -28,7 +23,6 @@ export class AppointmentsListComponent implements OnInit {
   addNewApp:boolean=false;
 
   appList:any[]=[];
-  // newData!:any;
 
   ngOnInit(): void {
     this.subData();
@@ -46,6 +40,7 @@ export class AppointmentsListComponent implements OnInit {
     this.service.getAppointments()
     .subscribe(response=>{
       this.appList=response
+
       console.log(this.appList);
     },(error)=>{
       console.log("appload error");
@@ -69,13 +64,17 @@ export class AppointmentsListComponent implements OnInit {
     this.service.setAppointment(newData)
     .subscribe(addData=>{
       this.appList.push(newData)
+      window.location.reload();
     },(error)=>{
       console.log("setapp error")
     })   
   }
 
-  Delete(i:IAppointment){
-    this.service.deleteAppointment(i.AppointmentId);
+  Delete(i:any){
+    console.log(i.appointmentId);    
+    this.service.deleteAppointment(i.appointmentId).subscribe();
+    window.location.reload();
+
   }
 
 }

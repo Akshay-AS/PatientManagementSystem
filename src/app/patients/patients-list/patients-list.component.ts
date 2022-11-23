@@ -13,12 +13,6 @@ export class PatientsListComponent implements OnInit {
 
   constructor(private formBuilder:UntypedFormBuilder,private httpClient:HttpClient,private service:ApiService) { }
 
-  // FirstName!:string;
-  // SecondName!:string;
-  // DOB!:string;
-  // SSN!:string;
-  // email!:string;
-  // PatientId!:number;
 
   formFields:any[]=[];
   form!:FormGroup;
@@ -26,7 +20,6 @@ export class PatientsListComponent implements OnInit {
   addNewPat:boolean=false;
 
   patList:any[]=[];
-  // newData!:IPatient;
 
   ngOnInit(): void {
     this.subData();
@@ -57,21 +50,29 @@ export class PatientsListComponent implements OnInit {
     this.addNewPat=true;
   }
 
+  Delete(i:any){
+    console.log(i);
+    this.service.deletePatient(i.patientId).subscribe();
+    window.location.reload();
+    console.log(i.patientId)
+  }
+
   onSubmit(){
     this.addNewPat=false;
-    const newData:any={
-    PatientID:parseInt(this.form.value.PatientId),
+    const newData:IPatient={
+    PatientId:parseInt(this.form.value.PatientId),
     FirstName:this.form.value.FirstName,
-    SecondName:this.form.value.SecondName,
+    LastName:this.form.value.SecondName,
     DOB:this.form.value.DOB,
     SSN:this.form.value.SSN,
-    email:this.form.value.email,
+    Email:this.form.value.email,
     isDeleted:false
     }
     console.log(newData);
     this.service.setPatient(newData)
     .subscribe(addData=>{
       this.patList.push(newData)
+      window.location.reload();
     },(error)=>{
       console.log("setpat error");   
     })

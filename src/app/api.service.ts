@@ -11,30 +11,33 @@ export class ApiService {
   httpClient: any;
 
   constructor(private http:HttpClient) { }
-  private GetPatientsUrl="https://localhost:7295/api/pms/GetPatients";
-  private GetAppointmentsUrl="https://localhost:7295/api/pms/GetAppointments";
-  private AddPatientUrl="https://localhost:7295/api/pms/AddPatients";
-  private AddAppointmentUrl="https://localhost:7295/api/pms/AddAppointment";
-  private RemoveAppUrl=`https://localhost:7295/api/pms/DeleteApp?id=`;
-
+  private patientsUrl="https://localhost:7295/api/pms/patients";
+  private appointmentsUrl="https://localhost:7295/api/pms/appointments";
+  
   getPatients():Observable<any>{
-    return this.http.get<any>(this.GetPatientsUrl)
+    return this.http.get<any>(this.patientsUrl)
   }
 
   getAppointments():Observable<any>{
-    return this.http.get<any>(this.GetAppointmentsUrl)
+    return this.http.get<any>(this.appointmentsUrl)
   }
 
   setPatient(data:IPatient):Observable<any>{
-    return this.http.post<IPatient[]>(this.AddPatientUrl,data)
+    return this.http.post<IPatient[]>(this.patientsUrl,data)
   }
 
   setAppointment(data:IAppointment):Observable<any>{
-    return this.http.post<IAppointment[]>(this.AddAppointmentUrl,data)
+    return this.http.post<IAppointment[]>(this.appointmentsUrl,data)
   }
 
-  deleteAppointment(id:any):Observable<any>{
-    return this.http.delete<IAppointment[]>(this.RemoveAppUrl+`${id}`,id);
+  deleteAppointment(id:any){
+    return this.http.delete(this.appointmentsUrl+'/'+id,id)
+    }
+    
+  
+
+  deletePatient(id:any){
+    return this.http.put(this.patientsUrl+'/'+id,id)
     
   }
 

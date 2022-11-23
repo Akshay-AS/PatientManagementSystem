@@ -5,10 +5,10 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" >
         <div>
             <label>Appointment Id</label>
-            <input type="text"  placeholder="Enter Patient Name" formControlName="appointmentId">
+            <input type="text"  placeholder="Enter Appointment Id" formControlName="appointmentId">
             <br><br>
             <label>Patient Id</label>
-            <input type="text"  placeholder="Enter Patient Name" formControlName="patientId">
+            <input type="text"  placeholder="Enter Patient Id" formControlName="patientId">
             <br><br>
             <label>Patient Name</label>
             <input type="text"  placeholder="Enter Patient Name" formControlName="patientName">
@@ -33,7 +33,7 @@
                 <p>Patient Name:{{i.patientName}}</p>
                 <p>Start Time:{{i.startTime}}</p>
                 <p>End Time:{{i.endTime}}</p>
-                <button (click)="Delete(i)">Delete</button>
+                <button (click)="Delete(i)">Cancel</button>
             </div>
         </div>
     </div>
