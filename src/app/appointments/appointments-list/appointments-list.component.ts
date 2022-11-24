@@ -16,7 +16,6 @@ export class AppointmentsListComponent implements OnInit {
 
   constructor(private service: ApiService) { }
 
-
   formFields: any[] = [];
   form!: FormGroup;
   addNewApp: boolean = false;
@@ -27,7 +26,7 @@ export class AppointmentsListComponent implements OnInit {
     this.form = new FormGroup({
       appointmentId: new FormControl('', Validators.required),
       patientId: new FormControl('', Validators.required),
-      patientName: new FormControl('', Validators.required),
+      appointmentDate: new FormControl('', Validators.required),
       startTime: new FormControl('', Validators.required),
       endTime: new FormControl('', Validators.required)
     });
@@ -45,31 +44,29 @@ export class AppointmentsListComponent implements OnInit {
   addAppointment() {
     this.addNewApp = true;
   }
+
   onSubmit() {
     this.addNewApp = false;
     const newData: IAppointment = {
       appointmentId: parseInt(this.form.value.appointmentId),
       patientId: parseInt(this.form.value.patientId),
-      patientName: this.form.value.patientName,
+      appointmentDate: this.form.value.appointmentDate,
       startTime: this.form.value.startTime,
       endTime: this.form.value.endTime,
     }
     console.log(newData);
-
     this.service.setAppointment(newData)
       .subscribe(addData => {
-        this.appList.push(newData)
-        window.location.reload();
+        this.appList.push(addData)
       }, (error) => {
         console.log("setapp error")
       })
+    
   }
 
   Delete(i: IAppointment) {
     console.log(i.appointmentId);
     this.service.deleteAppointment(i.appointmentId).subscribe();
     window.location.reload();
-
   }
-
 }

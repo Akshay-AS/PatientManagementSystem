@@ -10,8 +10,8 @@
             <label>Patient Id</label>
             <input type="text" placeholder="Enter Patient Id" formControlName="patientId">
             <br><br>
-            <label>Patient Name</label>
-            <input type="text" placeholder="Enter Patient Name" formControlName="patientName">
+            <label>Appointment Date </label>
+            <input type="date" placeholder="Enter Appointment Date" formControlName="appointmentDate">
             <br><br>
             <label>Start Time</label>
             <input type="time" placeholder="Enter Start Time" formControlName="startTime">
@@ -30,7 +30,7 @@
             <div class="container">
                 <p>Appointment ID:{{i.appointmentId}}</p>
                 <p>Patient ID:{{i.patientId}}</p>
-                <p>Patient Name:{{i.patientName}}</p>
+                <p>Appointment Date:{{i.appointmentDate}}</p>
                 <p>Start Time:{{i.startTime}}</p>
                 <p>End Time:{{i.endTime}}</p>
                 <button (click)="Delete(i)">Cancel</button>

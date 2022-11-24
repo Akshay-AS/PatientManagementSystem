@@ -1,7 +1,7 @@
 export interface IAppointment {
         appointmentId: number,
         patientId: number,
-        patientName: string,
+        appointmentDate: string,
         startTime: string,
         endTime: string
 }

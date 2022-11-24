@@ -13,7 +13,6 @@ export class PatientsListComponent implements OnInit {
 
   constructor(private formBuilder: UntypedFormBuilder, private httpClient: HttpClient, private service: ApiService) { }
 
-
   formFields: any[] = [];
   form!: FormGroup;
 
@@ -43,7 +42,6 @@ export class PatientsListComponent implements OnInit {
         console.log("patload error");
       });
   }
-
 
   addPatients() {
     this.addNewPat = true;
@@ -75,6 +73,5 @@ export class PatientsListComponent implements OnInit {
       }, (error) => {
         console.log("setpat error");
       })
-
   }
 }
